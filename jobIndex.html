@@ -1,0 +1,969 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ashwin EAV - Sales Operations Portal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --border: #e2e8f0;
+      --primary: #2563eb;
+      --primary-hover: #1d4ed8;
+      --emerald: #059669;
+      --emerald-bg: #ecfdf5;
+      --amber: #d97706;
+      --amber-bg: #fffbeb;
+      --rose: #e11d48;
+      --rose-bg: #fff1f2;
+      --indigo: #4f46e5;
+      --indigo-bg: #eef2ff;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', -apple-system, sans-serif; }
+    body { background-color: var(--bg); color: var(--text-main); min-height: 100vh; }
+
+    /* ========================================================
+       PREMIUM DESIGNED LOGIN PAGE (SPLIT-SCREEN)
+       ======================================================== */
+    #auth-view {
+      display: flex;
+      min-height: 100vh;
+      background: #0f172a;
+    }
+
+    /* Left Branding Banner */
+    .auth-banner {
+      flex: 1.1;
+      background: linear-gradient(135deg, #090d16 0%, #1e1b4b 50%, #1e3a8a 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 56px 64px;
+      position: relative;
+      overflow: hidden;
+      color: white;
+    }
+
+    /* Subtle glow circle decoration */
+    .auth-banner::before {
+      content: '';
+      position: absolute;
+      top: -120px;
+      right: -120px;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(59, 130, 246, 0.25) 0%, rgba(0,0,0,0) 70%);
+      border-radius: 50%;
+    }
+
+    .brand-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      padding: 8px 16px;
+      border-radius: 9999px;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      width: fit-content;
+      backdrop-filter: blur(8px);
+    }
+
+    .brand-badge span {
+      width: 8px;
+      height: 8px;
+      background: #38bdf8;
+      border-radius: 50%;
+      box-shadow: 0 0 10px #38bdf8;
+    }
+
+    .banner-content h1 {
+      font-size: 42px;
+      font-weight: 800;
+      line-height: 1.2;
+      letter-spacing: -1px;
+      margin-bottom: 20px;
+      background: linear-gradient(to right, #ffffff, #cbd5e1);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .banner-content p {
+      font-size: 16px;
+      color: #94a3b8;
+      line-height: 1.6;
+      max-width: 480px;
+      margin-bottom: 36px;
+    }
+
+    .features-list {
+      display: grid;
+      gap: 16px;
+      margin-top: 20px;
+    }
+
+    .feature-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 14px;
+      color: #e2e8f0;
+      font-weight: 500;
+    }
+
+    .feature-icon {
+      width: 24px;
+      height: 24px;
+      border-radius: 6px;
+      background: rgba(56, 189, 248, 0.15);
+      color: #38bdf8;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .banner-footer {
+      font-size: 13px;
+      color: #64748b;
+    }
+
+    /* Right Login Form Container */
+    .auth-form-wrapper {
+      flex: 0.9;
+      background: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px;
+    }
+
+    .auth-card {
+      width: 100%;
+      max-width: 420px;
+    }
+
+    .login-header {
+      margin-bottom: 32px;
+    }
+
+    .login-header h2 {
+      font-size: 26px;
+      font-weight: 800;
+      color: #0f172a;
+      letter-spacing: -0.6px;
+    }
+
+    .login-header p {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-top: 6px;
+    }
+
+    .auth-error {
+      display: none;
+      background: var(--rose-bg);
+      color: var(--rose);
+      font-size: 13px;
+      padding: 12px 14px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      font-weight: 600;
+      border: 1px solid #fecdd3;
+    }
+
+    .form-group {
+      margin-bottom: 18px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: #334155;
+      margin-bottom: 8px;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 12px 14px;
+      font-size: 14.5px;
+      border-radius: 10px;
+      border: 1.5px solid var(--border);
+      background: #f8fafc;
+      color: var(--text-main);
+      outline: none;
+      transition: all 0.2s;
+    }
+
+    .form-group input:focus {
+      background: #ffffff;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 4px rgba(37,99,235,0.1);
+    }
+
+    .btn-login {
+      width: 100%;
+      padding: 13px;
+      font-size: 15px;
+      font-weight: 700;
+      border-radius: 10px;
+      background: var(--primary);
+      color: white;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s;
+      margin-top: 8px;
+      box-shadow: 0 4px 12px rgba(37,99,235,0.25);
+    }
+
+    .btn-login:hover {
+      background: var(--primary-hover);
+      box-shadow: 0 6px 16px rgba(37,99,235,0.35);
+      transform: translateY(-1px);
+    }
+
+    .auto-fill-card {
+      margin-top: 24px;
+      padding: 14px;
+      background: #f8fafc;
+      border: 1px dashed #cbd5e1;
+      border-radius: 10px;
+      text-align: center;
+    }
+
+    .auto-fill-card p {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+
+    .btn-autofill {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--primary);
+      background: white;
+      border: 1px solid #bfdbfe;
+      padding: 6px 14px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .btn-autofill:hover {
+      background: #eff6ff;
+    }
+
+    /* Responsive Auth for Mobile */
+    @media (max-width: 900px) {
+      #auth-view { flex-direction: column; }
+      .auth-banner { padding: 40px 24px; }
+      .banner-content h1 { font-size: 30px; }
+      .auth-form-wrapper { padding: 40px 20px; }
+    }
+
+    /* ========================================================
+       MAIN DASHBOARD STYLES
+       ======================================================== */
+    #dashboard-view { display: none; padding: 32px 24px; }
+    .container { max-width: 1440px; margin: 0 auto; }
+
+    header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; flex-wrap: wrap; gap: 16px; }
+    .brand h1 { font-size: 24px; font-weight: 800; color: #0f172a; letter-spacing: -0.5px; }
+    .brand p { font-size: 14px; color: var(--text-muted); margin-top: 4px; display: flex; align-items: center; gap: 6px; }
+    
+    .status-dot { width: 8px; height: 8px; border-radius: 50%; background: #10b981; display: inline-block; }
+    .header-actions { display: flex; align-items: center; gap: 10px; }
+
+    .user-pill {
+      font-size: 13px; font-weight: 600; color: var(--text-muted);
+      padding: 8px 14px; background: white; border: 1px solid var(--border); border-radius: 8px;
+    }
+
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px; padding: 9px 16px;
+      font-size: 13.5px; font-weight: 600; border-radius: 8px; border: 1px solid transparent;
+      cursor: pointer; transition: all 0.15s ease-in-out;
+    }
+    .btn-primary { background: var(--primary); color: #fff; }
+    .btn-primary:hover { background: var(--primary-hover); }
+    .btn-outline { background: white; border: 1px solid var(--border); color: var(--text-main); }
+    .btn-outline:hover { background: #f1f5f9; }
+
+    /* KPI Summary Cards */
+    .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-bottom: 24px; }
+    .kpi-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 18px 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.02); }
+    .kpi-title { font-size: 13px; color: var(--text-muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+    .kpi-value { font-size: 22px; font-weight: 800; margin-top: 8px; color: var(--text-main); }
+
+    /* Tabs & Filters Bar */
+    .view-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; flex-wrap: wrap; gap: 16px; }
+    .tabs { display: flex; background: #e2e8f0; padding: 4px; border-radius: 10px; gap: 4px; }
+    .tab-btn {
+      padding: 8px 18px; border: none; background: transparent; font-size: 14px;
+      font-weight: 700; color: var(--text-muted); cursor: pointer; border-radius: 7px;
+      display: flex; align-items: center; gap: 8px; transition: all 0.2s;
+    }
+    .tab-btn.active { background: white; color: var(--text-main); box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+    .counter-badge { font-size: 11px; padding: 2px 7px; border-radius: 12px; background: #f1f5f9; color: var(--text-muted); }
+    .tab-btn.active .counter-badge { background: #eff6ff; color: var(--primary); }
+
+    .filter-count { font-size: 13px; color: var(--text-muted); font-weight: 600; }
+
+    /* Table Container */
+    .table-container { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; overflow-x: auto; box-shadow: 0 1px 4px rgba(0,0,0,0.03); }
+    table { width: 100%; border-collapse: collapse; text-align: left; min-width: 1020px; }
+    
+    th {
+      background: #f8fafc; padding: 12px 14px; font-size: 12px; text-transform: uppercase;
+      letter-spacing: 0.6px; color: var(--text-muted); font-weight: 700; border-bottom: 1px solid var(--border);
+    }
+    
+    /* Column Filter Row */
+    .filter-header-row th {
+      background: #f1f5f9;
+      padding: 8px 10px 10px 10px;
+      border-bottom: 2px solid var(--border);
+    }
+
+    .col-filter-input, .col-filter-select {
+      width: 100%;
+      padding: 6px 8px;
+      font-size: 12px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      background: #ffffff;
+      outline: none;
+      color: var(--text-main);
+    }
+
+    .col-filter-input:focus, .col-filter-select:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 2px rgba(37,99,235,0.1);
+    }
+
+    td { padding: 14px 14px; font-size: 13.5px; border-bottom: 1px solid var(--border); vertical-align: middle; }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background-color: #fafbfc; }
+
+    /* Badges */
+    .badge { display: inline-block; padding: 4px 9px; font-size: 11.5px; font-weight: 700; border-radius: 6px; }
+    .badge-install { background: var(--indigo-bg); color: var(--indigo); }
+    .badge-dryhire { background: #f3f4f6; color: #4b5563; }
+    .badge-paid { background: var(--emerald-bg); color: var(--emerald); }
+    .badge-partial { background: var(--amber-bg); color: var(--amber); }
+    .badge-notpaid { background: var(--rose-bg); color: var(--rose); }
+
+    .price-col { font-weight: 700; white-space: nowrap; }
+    .currency-tag { font-size: 11px; color: var(--text-muted); margin-right: 2px; }
+
+    .actions-group { display: flex; justify-content: flex-end; gap: 5px; align-items: center; }
+    .row-action {
+      font-size: 12px; padding: 5px 9px; border-radius: 6px; cursor: pointer;
+      font-weight: 600; border: 1px solid var(--border); background: white; transition: 0.15s;
+    }
+    .row-action:hover { background: #f8fafc; }
+    .row-action.confirm-action { background: var(--emerald-bg); color: var(--emerald); border-color: #a7f3d0; }
+    .row-action.confirm-action:hover { background: #d1fae5; }
+    .row-action.edit-action { color: var(--primary); }
+    .row-action.edit-action:hover { background: #eff6ff; }
+    .row-action.danger-action { color: var(--rose); }
+    .row-action.danger-action:hover { background: var(--rose-bg); }
+
+    .btn-reset-filters {
+      width: 100%;
+      padding: 6px;
+      font-size: 11.5px;
+      font-weight: 700;
+      border: 1px solid var(--border);
+      background: white;
+      border-radius: 6px;
+      cursor: pointer;
+      color: var(--text-muted);
+    }
+    .btn-reset-filters:hover { background: #fee2e2; color: var(--rose); border-color: #fca5a5; }
+
+    .modal-overlay {
+      display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(15, 23, 42, 0.45); backdrop-filter: blur(2px);
+      justify-content: center; align-items: center; z-index: 100;
+    }
+    .modal-overlay.active { display: flex; }
+    .modal { background: white; border-radius: 14px; padding: 24px 28px; width: 100%; max-width: 520px; box-shadow: 0 10px 25px rgba(0,0,0,0.15); }
+    .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+    .modal-header h3 { font-size: 18px; font-weight: 800; }
+    .close-btn { background: none; border: none; font-size: 20px; color: var(--text-muted); cursor: pointer; }
+    .empty-state { padding: 48px; text-align: center; color: var(--text-muted); font-size: 14px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  </style>
+</head>
+<body>
+
+  <!-- ==========================================
+       1. SPLIT-SCREEN EXECUTIVE LOGIN PAGE
+       ========================================== -->
+  <div id="auth-view">
+    <!-- Left Visual Branding -->
+    <div class="auth-banner">
+      <div class="brand-badge">
+        <span></span> ASHWIN EAV SALES
+      </div>
+
+      <div class="banner-content">
+        <h1>Event Equipment & Rental Operations</h1>
+        <p>Enterprise tracking portal for quotation pipelines, client confirmations, and multi-currency UAE invoices.</p>
+
+        <div class="features-list">
+          <div class="feature-item">
+            <div class="feature-icon">✓</div>
+            <span>Requirements pipeline to Confirmed conversion</span>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon">✓</div>
+            <span>Real-time Google Cloud Firestore synchronization</span>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon">✓</div>
+            <span>Live AED revenue metrics & column filters</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="banner-footer">
+        &copy; 2025 Ashwin EAV Systems. All rights reserved.
+      </div>
+    </div>
+
+    <!-- Right Login Form -->
+    <div class="auth-form-wrapper">
+      <div class="auth-card">
+        <div class="login-header">
+          <h2>Welcome back</h2>
+          <p>Sign in to access your operations dashboard</p>
+        </div>
+
+        <div class="auth-error" id="auth-error-msg"></div>
+
+        <form onsubmit="handleAuthSubmit(event)">
+          <div class="form-group">
+            <label>Username / Email</label>
+            <input type="email" id="auth-email" placeholder="Enter UserName" required />
+          </div>
+          <div class="form-group">
+            <label>Password</label>
+            <input type="password" id="auth-password" placeholder="••••••••" required />
+          </div>
+
+          <button type="submit" class="btn-login" id="auth-submit-btn">
+            Sign In to Portal
+          </button>
+        </form>
+
+        <!-- Quick 1-Click Fill Helper -->
+        <div class="auto-fill-card">
+          <p>Quick Access Credentials Configured</p>
+          <button type="button" class="btn-autofill" onclick="autoFillCredentials()">
+            ⚡ One-Click Auto-Fill
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================
+       2. MAIN DASHBOARD VIEW
+       ========================================== -->
+  <div id="dashboard-view">
+    <div class="container">
+      <header>
+        <div class="brand">
+          <h1>Event Equipment & Rental Tracker</h1>
+          <p><span class="status-dot"></span> Cloud Synchronized (ashwineavsales)</p>
+        </div>
+        <div class="header-actions">
+          <div class="user-pill" id="user-display-email">ashwinanu7200@gmail.com</div>
+          <button class="btn btn-outline" onclick="loadInitialExcelData()">Import Defaults</button>
+          <button class="btn btn-outline" onclick="exportToCSV()">Export to CSV</button>
+          <button class="btn btn-primary" onclick="openModal()">+ Add New Inquiry</button>
+          <button class="btn btn-outline" onclick="handleSignOut()">Sign Out</button>
+        </div>
+      </header>
+
+      <!-- KPI Summary Cards -->
+      <div class="kpi-grid">
+        <div class="kpi-card">
+          <div class="kpi-title">Active Inquiries</div>
+          <div class="kpi-value" id="kpi-inquiry-count">0</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-title">Confirmed Jobs</div>
+          <div class="kpi-value" id="kpi-confirmed-count" style="color: var(--emerald);">0</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-title">Pipeline Value (Inquiries)</div>
+          <div class="kpi-value" id="kpi-inquiry-value">AED 0</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-title">Confirmed Revenue</div>
+          <div class="kpi-value" id="kpi-confirmed-value" style="color: var(--primary);">AED 0</div>
+        </div>
+      </div>
+
+      <!-- Navigation Tabs & Row Count -->
+      <div class="view-bar">
+        <div class="tabs">
+          <button class="tab-btn active" id="tab-inquiry" onclick="switchTab('inquiry')">
+            📥 Requirements / Inquiries
+            <span class="counter-badge" id="tab-inquiry-badge">0</span>
+          </button>
+          <button class="tab-btn" id="tab-confirmed" onclick="switchTab('confirmed')">
+            ✅ Confirmed Jobs
+            <span class="counter-badge" id="tab-confirmed-badge">0</span>
+          </button>
+        </div>
+        <div class="filter-count" id="active-rows-count">Showing all rows</div>
+      </div>
+
+      <!-- Main Data Table with Column Filters -->
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th style="width: 120px;">Date</th>
+              <th style="width: 180px;">Client Name</th>
+              <th style="width: 180px;">Show Name</th>
+              <th style="width: 130px;">Type</th>
+              <th>Requirement</th>
+              <th style="width: 130px;">Total Price</th>
+              <th style="width: 130px;">Payment Status</th>
+              <th style="width: 170px; text-align: right;">Actions</th>
+            </tr>
+            <!-- Individual Column Search Inputs -->
+            <tr class="filter-header-row">
+              <th>
+                <input type="text" class="col-filter-input" id="col-f-date" placeholder="Search Date..." oninput="renderTables()" />
+              </th>
+              <th>
+                <input type="text" class="col-filter-input" id="col-f-client" placeholder="Filter Client..." oninput="renderTables()" />
+              </th>
+              <th>
+                <input type="text" class="col-filter-input" id="col-f-show" placeholder="Filter Show..." oninput="renderTables()" />
+              </th>
+              <th>
+                <select class="col-filter-select" id="col-f-type" onchange="renderTables()">
+                  <option value="">All Types</option>
+                  <option value="Installation">Installation</option>
+                  <option value="DryHire">DryHire</option>
+                </select>
+              </th>
+              <th>
+                <input type="text" class="col-filter-input" id="col-f-requirement" placeholder="Filter Requirement..." oninput="renderTables()" />
+              </th>
+              <th>
+                <input type="text" class="col-filter-input" id="col-f-price" placeholder="Filter Price..." oninput="renderTables()" />
+              </th>
+              <th>
+                <select class="col-filter-select" id="col-f-paid" onchange="renderTables()">
+                  <option value="">All Statuses</option>
+                  <option value="Not Paid">Not Paid</option>
+                  <option value="50% Paid">50% Paid</option>
+                  <option value="Paid">Paid</option>
+                </select>
+              </th>
+              <th style="text-align: right;">
+                <button class="btn-reset-filters" onclick="resetColumnFilters()" title="Reset all column filters">Clear Filters ✕</button>
+              </th>
+            </tr>
+          </thead>
+          <tbody id="table-body">
+            <tr><td colspan="8" class="empty-state">Loading database records...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Add / Edit Modal -->
+  <div class="modal-overlay" id="modal-overlay">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 id="modal-title">New Requirement Inquiry</h3>
+        <button class="close-btn" onclick="closeModal()">&times;</button>
+      </div>
+      <form id="inquiry-form" onsubmit="handleFormSubmit(event)">
+        <input type="hidden" id="form-edit-id" value="" />
+        
+        <div class="form-row">
+          <div class="form-group">
+            <label>Date</label>
+            <input type="date" id="form-date" required />
+          </div>
+          <div class="form-group">
+            <label>Client Name</label>
+            <input type="text" id="form-client" placeholder="e.g. Tech Vista" required />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Show / Event Name</label>
+            <input type="text" id="form-show" placeholder="e.g. ADIPEC" required />
+          </div>
+          <div class="form-group">
+            <label>Installation / Dryhire</label>
+            <select id="form-type" required>
+              <option value="Installation">Installation</option>
+              <option value="DryHire">DryHire</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Requirement Details</label>
+          <input type="text" id="form-requirement" placeholder="e.g. Magnetic Module / 4m x 2.5m" required />
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Total Price (AED)</label>
+            <input type="number" id="form-price" placeholder="4725" min="0" step="any" required />
+          </div>
+          <div class="form-group">
+            <label>Paid Remarks</label>
+            <select id="form-paid" required>
+              <option value="Not Paid">Not Paid</option>
+              <option value="50% Paid">50% Paid</option>
+              <option value="Paid">Fully Paid</option>
+            </select>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary" id="save-btn" style="width: 100%; margin-top: 14px; justify-content: center;">
+          Save to Cloud
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Firebase Scripts -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+    import { 
+      getFirestore, collection, addDoc, onSnapshot, doc, updateDoc, deleteDoc, serverTimestamp 
+    } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+    // Your Exact Config
+    const firebaseConfig = {
+      apiKey: "AIzaSyCKTprB6-2W9CMFOvGrPvm8lgEEBrpKa9s",
+      authDomain: "ashwineavsales.firebaseapp.com",
+      projectId: "ashwineavsales",
+      storageBucket: "ashwineavsales.firebasestorage.app",
+      messagingSenderId: "589784054345",
+      appId: "1:589784054345:web:334749b8d04ebe089bdd98",
+      measurementId: "G-EPFWRFNM4Y"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+    const jobsCollection = collection(db, "jobs");
+
+    let records = [];
+    let currentTab = 'inquiry';
+    let unsubscribeSnapshot = null;
+
+    // YOUR HARDCODED CREDENTIALS
+    const VALID_USER = "ashwinanu7200@gmail.com";
+    const VALID_PASS = "12345678900";
+
+    // 1-Click Auto Fill
+    window.autoFillCredentials = function() {
+      document.getElementById('auth-email').value = VALID_USER;
+      document.getElementById('auth-password').value = VALID_PASS;
+    };
+
+    // Check Login
+    window.handleAuthSubmit = function(e) {
+      e.preventDefault();
+      const email = document.getElementById('auth-email').value.trim();
+      const pass = document.getElementById('auth-password').value.trim();
+      const errorDiv = document.getElementById('auth-error-msg');
+
+      if (email.toLowerCase() === VALID_USER.toLowerCase() && pass === VALID_PASS) {
+        // Successful login
+        sessionStorage.setItem("isLoggedIn", "true");
+        launchDashboard();
+      } else {
+        errorDiv.innerText = "Invalid credentials. Please check your username and password.";
+        errorDiv.style.display = 'block';
+      }
+    };
+
+    function launchDashboard() {
+      document.getElementById('auth-view').style.display = 'none';
+      document.getElementById('dashboard-view').style.display = 'block';
+
+      // Connect to Firestore
+      if (!unsubscribeSnapshot) {
+        unsubscribeSnapshot = onSnapshot(jobsCollection, (snapshot) => {
+          records = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+          updateMetrics();
+          renderTables();
+        });
+      }
+    }
+
+    // Check session on load
+    if (sessionStorage.getItem("isLoggedIn") === "true") {
+      launchDashboard();
+    }
+
+    // Sign Out
+    window.handleSignOut = function() {
+      if (confirm("Are you sure you want to log out?")) {
+        sessionStorage.removeItem("isLoggedIn");
+        location.reload();
+      }
+    };
+
+    // Dashboard Functions
+    window.switchTab = function(tab) {
+      currentTab = tab;
+      document.getElementById('tab-inquiry').classList.toggle('active', tab === 'inquiry');
+      document.getElementById('tab-confirmed').classList.toggle('active', tab === 'confirmed');
+      renderTables();
+    };
+
+    window.resetColumnFilters = function() {
+      document.getElementById('col-f-date').value = '';
+      document.getElementById('col-f-client').value = '';
+      document.getElementById('col-f-show').value = '';
+      document.getElementById('col-f-type').value = '';
+      document.getElementById('col-f-requirement').value = '';
+      document.getElementById('col-f-price').value = '';
+      document.getElementById('col-f-paid').value = '';
+      renderTables();
+    };
+
+    window.toggleStatus = async function(id) {
+      const record = records.find(r => r.id === id);
+      if (record) {
+        const nextStatus = record.status === 'inquiry' ? 'confirmed' : 'inquiry';
+        await updateDoc(doc(db, "jobs", id), { status: nextStatus });
+      }
+    };
+
+    window.updatePayment = async function(id) {
+      const record = records.find(r => r.id === id);
+      if (!record) return;
+      const opts = ["Not Paid", "50% Paid", "Paid"];
+      const nextIndex = (opts.indexOf(record.paid) + 1) % opts.length;
+      await updateDoc(doc(db, "jobs", id), { paid: opts[nextIndex] });
+    };
+
+    window.deleteRecord = async function(id) {
+      if (confirm("Are you sure you want to permanently delete this job?")) {
+        await deleteDoc(doc(db, "jobs", id));
+      }
+    };
+
+    window.openModal = function() {
+      document.getElementById('inquiry-form').reset();
+      document.getElementById('form-edit-id').value = '';
+      document.getElementById('modal-title').innerText = "New Requirement Inquiry";
+      document.getElementById('save-btn').innerText = "Save to Cloud";
+      document.getElementById('form-date').value = new Date().toISOString().split('T')[0];
+      document.getElementById('modal-overlay').classList.add('active');
+    };
+
+    window.openEditModal = function(id) {
+      const record = records.find(r => r.id === id);
+      if (!record) return;
+
+      document.getElementById('form-edit-id').value = record.id;
+      document.getElementById('form-date').value = record.date || '';
+      document.getElementById('form-client').value = record.client || '';
+      document.getElementById('form-show').value = record.show || '';
+      document.getElementById('form-type').value = record.type || 'Installation';
+      document.getElementById('form-requirement').value = record.requirement || '';
+      document.getElementById('form-price').value = record.price || 0;
+      document.getElementById('form-paid').value = record.paid || 'Not Paid';
+
+      document.getElementById('modal-title').innerText = "Edit Job Details";
+      document.getElementById('save-btn').innerText = "Update Entry";
+      document.getElementById('modal-overlay').classList.add('active');
+    };
+
+    window.closeModal = function() {
+      document.getElementById('modal-overlay').classList.remove('active');
+      document.getElementById('inquiry-form').reset();
+      document.getElementById('form-edit-id').value = '';
+    };
+
+    window.handleFormSubmit = async function(e) {
+      e.preventDefault();
+      const saveBtn = document.getElementById('save-btn');
+      const editId = document.getElementById('form-edit-id').value;
+
+      saveBtn.innerText = editId ? "Updating..." : "Saving...";
+      saveBtn.disabled = true;
+
+      const recordData = {
+        date: document.getElementById('form-date').value,
+        client: document.getElementById('form-client').value,
+        show: document.getElementById('form-show').value,
+        type: document.getElementById('form-type').value,
+        requirement: document.getElementById('form-requirement').value,
+        price: Number(document.getElementById('form-price').value),
+        paid: document.getElementById('form-paid').value
+      };
+
+      try {
+        if (editId) {
+          await updateDoc(doc(db, "jobs", editId), recordData);
+        } else {
+          await addDoc(jobsCollection, {
+            ...recordData,
+            status: 'inquiry',
+            createdAt: serverTimestamp()
+          });
+          window.switchTab('inquiry');
+        }
+        window.closeModal();
+      } catch (err) {
+        alert("Operation failed: " + err.message);
+      } finally {
+        saveBtn.disabled = false;
+      }
+    };
+
+    window.loadInitialExcelData = async function() {
+      if (!confirm("Import original Excel rows into the cloud?")) return;
+      const initialRows = [
+        { date: "2024-10-15", client: "Tech Vista", show: "ADIPEC", type: "Installation", requirement: "Magnetic Module", price: 4725, paid: "50% Paid", status: "confirmed" },
+        { date: "2024-10-18", client: "Tech Vista", show: "Tobacco Show", type: "DryHire", requirement: "1.9 - 6 sqm", price: 3150, paid: "Not Paid", status: "inquiry" },
+        { date: "2024-10-22", client: "Meet-X media", show: "Outdoor Event", type: "Installation", requirement: "4m x 2.5m", price: 6300, paid: "Not Paid", status: "inquiry" },
+        { date: "2024-10-25", client: "LEID", show: "Automachnica", type: "Installation", requirement: "43\" touch", price: 1050, paid: "Not Paid", status: "inquiry" },
+        { date: "2024-10-28", client: "LEID", show: "Big 5", type: "Installation", requirement: "2.5m x 1.5m", price: 5145, paid: "Not Paid", status: "inquiry" }
+      ];
+
+      for (let item of initialRows) {
+        await addDoc(jobsCollection, item);
+      }
+      alert("Excel rows imported!");
+    };
+
+    window.exportToCSV = function() {
+      let csv = "DATE,CLIENT NAME,SHOW NAME,TYPE,REQUIREMENT,TOTAL PRICE (AED),PAID REMARKS,STATUS\n";
+      records.forEach(r => {
+        csv += `"${r.date}","${r.client}","${r.show}","${r.type}","${r.requirement}","${r.price}","${r.paid}","${r.status}"\n`;
+      });
+      const blob = new Blob([csv], { type: 'text/csv' });
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.setAttribute('href', url);
+      a.setAttribute('download', `AshwinEAV_Jobs_${new Date().toISOString().slice(0,10)}.csv`);
+      a.click();
+    };
+
+    function updateMetrics() {
+      const inquiries = records.filter(r => r.status === 'inquiry');
+      const confirmed = records.filter(r => r.status === 'confirmed');
+
+      const inquiryVal = inquiries.reduce((sum, r) => sum + Number(r.price || 0), 0);
+      const confirmedVal = confirmed.reduce((sum, r) => sum + Number(r.price || 0), 0);
+
+      document.getElementById('kpi-inquiry-count').textContent = inquiries.length;
+      document.getElementById('kpi-confirmed-count').textContent = confirmed.length;
+      document.getElementById('kpi-inquiry-value').textContent = 'AED ' + inquiryVal.toLocaleString();
+      document.getElementById('kpi-confirmed-value').textContent = 'AED ' + confirmedVal.toLocaleString();
+
+      document.getElementById('tab-inquiry-badge').textContent = inquiries.length;
+      document.getElementById('tab-confirmed-badge').textContent = confirmed.length;
+    }
+
+    function getPaidBadge(paid) {
+      if (paid === 'Paid') return '<span class="badge badge-paid">Paid</span>';
+      if (paid && paid.includes('50%')) return '<span class="badge badge-partial">50% Paid</span>';
+      return '<span class="badge badge-notpaid">Not Paid</span>';
+    }
+
+    // MULTI-COLUMN FILTER ENGINE
+    window.renderTables = function() {
+      const tbody = document.getElementById('table-body');
+
+      const fDate = (document.getElementById('col-f-date')?.value || '').toLowerCase().trim();
+      const fClient = (document.getElementById('col-f-client')?.value || '').toLowerCase().trim();
+      const fShow = (document.getElementById('col-f-show')?.value || '').toLowerCase().trim();
+      const fType = (document.getElementById('col-f-type')?.value || '').trim();
+      const fReq = (document.getElementById('col-f-requirement')?.value || '').toLowerCase().trim();
+      const fPrice = (document.getElementById('col-f-price')?.value || '').trim();
+      const fPaid = (document.getElementById('col-f-paid')?.value || '').trim();
+
+      const filtered = records.filter(r => {
+        if (r.status !== currentTab) return false;
+
+        const matchDate = !fDate || (r.date || '').toLowerCase().includes(fDate);
+        const matchClient = !fClient || (r.client || '').toLowerCase().includes(fClient);
+        const matchShow = !fShow || (r.show || '').toLowerCase().includes(fShow);
+        const matchType = !fType || (r.type || '') === fType;
+        const matchReq = !fReq || (r.requirement || '').toLowerCase().includes(fReq);
+        const matchPrice = !fPrice || (r.price || '').toString().includes(fPrice);
+        const matchPaid = !fPaid || (r.paid || '') === fPaid;
+
+        return matchDate && matchClient && matchShow && matchType && matchReq && matchPrice && matchPaid;
+      });
+
+      const activeRowsCount = document.getElementById('active-rows-count');
+      if (activeRowsCount) {
+        activeRowsCount.innerText = `Showing ${filtered.length} of ${records.filter(r => r.status === currentTab).length} records`;
+      }
+
+      if (filtered.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="8" class="empty-state">No matching records found.</td></tr>`;
+        return;
+      }
+
+      tbody.innerHTML = filtered.map(item => `
+        <tr>
+          <td style="color: var(--text-muted); font-size: 13px;">${item.date || '—'}</td>
+          <td style="font-weight: 700;">${item.client}</td>
+          <td>${item.show}</td>
+          <td>
+            <span class="badge ${item.type === 'Installation' ? 'badge-install' : 'badge-dryhire'}">
+              ${item.type}
+            </span>
+          </td>
+          <td>${item.requirement}</td>
+          <td class="price-col">
+            <span class="currency-tag">AED</span>${Number(item.price || 0).toLocaleString()}
+          </td>
+          <td>
+            <div style="cursor: pointer;" title="Click to cycle status" onclick="updatePayment('${item.id}')">
+              ${getPaidBadge(item.paid)}
+            </div>
+          </td>
+          <td>
+            <div class="actions-group">
+              ${item.status === 'inquiry' 
+                ? `<button class="row-action confirm-action" onclick="toggleStatus('${item.id}')">✓ Confirm</button>`
+                : `<button class="row-action" onclick="toggleStatus('${item.id}')">To Inquiry</button>`
+              }
+              <button class="row-action edit-action" onclick="openEditModal('${item.id}')">Edit</button>
+              <button class="row-action danger-action" onclick="deleteRecord('${item.id}')">Delete</button>
+            </div>
+          </td>
+        </tr>
+      `).join('');
+    };
+  </script>
+</body>
+</html>
