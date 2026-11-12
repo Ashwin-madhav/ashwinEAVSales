@@ -30,16 +30,13 @@
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', -apple-system, sans-serif; }
     body { background-color: var(--bg); color: var(--text-main); min-height: 100vh; }
 
-    /* ========================================================
-       PREMIUM DESIGNED LOGIN PAGE (SPLIT-SCREEN)
-       ======================================================== */
+    /* SPLIT-SCREEN LOGIN PAGE */
     #auth-view {
       display: flex;
       min-height: 100vh;
       background: #0f172a;
     }
 
-    /* Left Branding Banner */
     .auth-banner {
       flex: 1.1;
       background: linear-gradient(135deg, #090d16 0%, #1e1b4b 50%, #1e3a8a 100%);
@@ -52,7 +49,6 @@
       color: white;
     }
 
-    /* Subtle glow circle decoration */
     .auth-banner::before {
       content: '';
       position: absolute;
@@ -106,164 +102,57 @@
       margin-bottom: 36px;
     }
 
-    .features-list {
-      display: grid;
-      gap: 16px;
-      margin-top: 20px;
-    }
-
-    .feature-item {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-size: 14px;
-      color: #e2e8f0;
-      font-weight: 500;
-    }
-
+    .features-list { display: grid; gap: 16px; margin-top: 20px; }
+    .feature-item { display: flex; align-items: center; gap: 12px; font-size: 14px; color: #e2e8f0; font-weight: 500; }
     .feature-icon {
-      width: 24px;
-      height: 24px;
-      border-radius: 6px;
-      background: rgba(56, 189, 248, 0.15);
-      color: #38bdf8;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 12px;
-      font-weight: 700;
+      width: 24px; height: 24px; border-radius: 6px; background: rgba(56, 189, 248, 0.15);
+      color: #38bdf8; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700;
     }
 
-    .banner-footer {
-      font-size: 13px;
-      color: #64748b;
-    }
+    .banner-footer { font-size: 13px; color: #64748b; }
 
-    /* Right Login Form Container */
     .auth-form-wrapper {
-      flex: 0.9;
-      background: #ffffff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 40px;
+      flex: 0.9; background: #ffffff; display: flex; align-items: center; justify-content: center; padding: 40px;
     }
-
-    .auth-card {
-      width: 100%;
-      max-width: 420px;
-    }
-
-    .login-header {
-      margin-bottom: 32px;
-    }
-
-    .login-header h2 {
-      font-size: 26px;
-      font-weight: 800;
-      color: #0f172a;
-      letter-spacing: -0.6px;
-    }
-
-    .login-header p {
-      font-size: 14px;
-      color: var(--text-muted);
-      margin-top: 6px;
-    }
+    .auth-card { width: 100%; max-width: 420px; }
+    .login-header { margin-bottom: 32px; }
+    .login-header h2 { font-size: 26px; font-weight: 800; color: #0f172a; letter-spacing: -0.6px; }
+    .login-header p { font-size: 14px; color: var(--text-muted); margin-top: 6px; }
 
     .auth-error {
-      display: none;
-      background: var(--rose-bg);
-      color: var(--rose);
-      font-size: 13px;
-      padding: 12px 14px;
-      border-radius: 10px;
-      margin-bottom: 20px;
-      font-weight: 600;
-      border: 1px solid #fecdd3;
+      display: none; background: var(--rose-bg); color: var(--rose); font-size: 13px;
+      padding: 12px 14px; border-radius: 10px; margin-bottom: 20px; font-weight: 600; border: 1px solid #fecdd3;
     }
 
-    .form-group {
-      margin-bottom: 18px;
-    }
-
-    .form-group label {
-      display: block;
-      font-size: 13px;
-      font-weight: 600;
-      color: #334155;
-      margin-bottom: 8px;
-    }
-
+    .form-group { margin-bottom: 18px; }
+    .form-group label { display: block; font-size: 13px; font-weight: 600; color: #334155; margin-bottom: 8px; }
     .form-group input {
-      width: 100%;
-      padding: 12px 14px;
-      font-size: 14.5px;
-      border-radius: 10px;
-      border: 1.5px solid var(--border);
-      background: #f8fafc;
-      color: var(--text-main);
-      outline: none;
-      transition: all 0.2s;
+      width: 100%; padding: 12px 14px; font-size: 14.5px; border-radius: 10px;
+      border: 1.5px solid var(--border); background: #f8fafc; color: var(--text-main); outline: none; transition: all 0.2s;
     }
-
     .form-group input:focus {
-      background: #ffffff;
-      border-color: var(--primary);
-      box-shadow: 0 0 0 4px rgba(37,99,235,0.1);
+      background: #ffffff; border-color: var(--primary); box-shadow: 0 0 0 4px rgba(37,99,235,0.1);
     }
 
     .btn-login {
-      width: 100%;
-      padding: 13px;
-      font-size: 15px;
-      font-weight: 700;
-      border-radius: 10px;
-      background: var(--primary);
-      color: white;
-      border: none;
-      cursor: pointer;
-      transition: all 0.2s;
-      margin-top: 8px;
-      box-shadow: 0 4px 12px rgba(37,99,235,0.25);
+      width: 100%; padding: 13px; font-size: 15px; font-weight: 700; border-radius: 10px;
+      background: var(--primary); color: white; border: none; cursor: pointer; transition: all 0.2s;
+      margin-top: 8px; box-shadow: 0 4px 12px rgba(37,99,235,0.25);
     }
-
     .btn-login:hover {
-      background: var(--primary-hover);
-      box-shadow: 0 6px 16px rgba(37,99,235,0.35);
-      transform: translateY(-1px);
+      background: var(--primary-hover); box-shadow: 0 6px 16px rgba(37,99,235,0.35); transform: translateY(-1px);
     }
 
     .auto-fill-card {
-      margin-top: 24px;
-      padding: 14px;
-      background: #f8fafc;
-      border: 1px dashed #cbd5e1;
-      border-radius: 10px;
-      text-align: center;
+      margin-top: 24px; padding: 14px; background: #f8fafc; border: 1px dashed #cbd5e1; border-radius: 10px; text-align: center;
     }
-
-    .auto-fill-card p {
-      font-size: 12px;
-      color: var(--text-muted);
-      margin-bottom: 8px;
-    }
-
+    .auto-fill-card p { font-size: 12px; color: var(--text-muted); margin-bottom: 8px; }
     .btn-autofill {
-      font-size: 12px;
-      font-weight: 700;
-      color: var(--primary);
-      background: white;
-      border: 1px solid #bfdbfe;
-      padding: 6px 14px;
-      border-radius: 6px;
-      cursor: pointer;
+      font-size: 12px; font-weight: 700; color: var(--primary); background: white; border: 1px solid #bfdbfe;
+      padding: 6px 14px; border-radius: 6px; cursor: pointer;
     }
-    .btn-autofill:hover {
-      background: #eff6ff;
-    }
+    .btn-autofill:hover { background: #eff6ff; }
 
-    /* Responsive Auth for Mobile */
     @media (max-width: 900px) {
       #auth-view { flex-direction: column; }
       .auth-banner { padding: 40px 24px; }
@@ -271,11 +160,9 @@
       .auth-form-wrapper { padding: 40px 20px; }
     }
 
-    /* ========================================================
-       MAIN DASHBOARD STYLES
-       ======================================================== */
+    /* MAIN DASHBOARD */
     #dashboard-view { display: none; padding: 32px 24px; }
-    .container { max-width: 1440px; margin: 0 auto; }
+    .container { max-width: 1520px; margin: 0 auto; }
 
     header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; flex-wrap: wrap; gap: 16px; }
     .brand h1 { font-size: 24px; font-weight: 800; color: #0f172a; letter-spacing: -0.5px; }
@@ -299,10 +186,15 @@
     .btn-outline { background: white; border: 1px solid var(--border); color: var(--text-main); }
     .btn-outline:hover { background: #f1f5f9; }
 
-    /* KPI Summary Cards */
-    .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-bottom: 24px; }
+    /* 5-COLUMN KPI GRID */
+    .kpi-grid { 
+      display: grid; 
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
+      gap: 16px; 
+      margin-bottom: 24px; 
+    }
     .kpi-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 18px 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.02); }
-    .kpi-title { font-size: 13px; color: var(--text-muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+    .kpi-title { font-size: 12px; color: var(--text-muted); font-weight: 700; text-transform: uppercase; letter-spacing: 0.6px; }
     .kpi-value { font-size: 22px; font-weight: 800; margin-top: 8px; color: var(--text-main); }
 
     /* Tabs & Filters Bar */
@@ -328,7 +220,6 @@
       letter-spacing: 0.6px; color: var(--text-muted); font-weight: 700; border-bottom: 1px solid var(--border);
     }
     
-    /* Column Filter Row */
     .filter-header-row th {
       background: #f1f5f9;
       padding: 8px 10px 10px 10px;
@@ -355,7 +246,6 @@
     tr:last-child td { border-bottom: none; }
     tr:hover td { background-color: #fafbfc; }
 
-    /* Badges */
     .badge { display: inline-block; padding: 4px 9px; font-size: 11.5px; font-weight: 700; border-radius: 6px; }
     .badge-install { background: var(--indigo-bg); color: var(--indigo); }
     .badge-dryhire { background: #f3f4f6; color: #4b5563; }
@@ -408,42 +298,25 @@
 </head>
 <body>
 
-  <!-- ==========================================
-       1. SPLIT-SCREEN EXECUTIVE LOGIN PAGE
-       ========================================== -->
+  <!-- 1. LOGIN SCREEN -->
   <div id="auth-view">
-    <!-- Left Visual Branding -->
     <div class="auth-banner">
-      <div class="brand-badge">
-        <span></span> ASHWIN EAV SALES
-      </div>
+      <div class="brand-badge"><span></span> ASHWIN EAV SALES</div>
 
       <div class="banner-content">
         <h1>Event Equipment & Rental Operations</h1>
-        <p>Enterprise tracking portal for quotation pipelines, client confirmations, and multi-currency UAE invoices.</p>
+        <p>Enterprise tracking portal for quotation pipelines, client confirmations, and live payment settlements in AED.</p>
 
         <div class="features-list">
-          <div class="feature-item">
-            <div class="feature-icon">✓</div>
-            <span>Requirements pipeline to Confirmed conversion</span>
-          </div>
-          <div class="feature-item">
-            <div class="feature-icon">✓</div>
-            <span>Real-time Google Cloud Firestore synchronization</span>
-          </div>
-          <div class="feature-item">
-            <div class="feature-icon">✓</div>
-            <span>Live AED revenue metrics & column filters</span>
-          </div>
+          <div class="feature-item"><div class="feature-icon">✓</div><span>Requirements pipeline to Confirmed conversion</span></div>
+          <div class="feature-item"><div class="feature-icon">✓</div><span>Real-time Google Cloud Firestore synchronization</span></div>
+          <div class="feature-item"><div class="feature-icon">✓</div><span>Live AED revenue metrics & Received Cash tracking</span></div>
         </div>
       </div>
 
-      <div class="banner-footer">
-        &copy; 2025 Ashwin EAV Systems. All rights reserved.
-      </div>
+      <div class="banner-footer">&copy; 2025 Ashwin EAV Systems. All rights reserved.</div>
     </div>
 
-    <!-- Right Login Form -->
     <div class="auth-form-wrapper">
       <div class="auth-card">
         <div class="login-header">
@@ -456,32 +329,25 @@
         <form onsubmit="handleAuthSubmit(event)">
           <div class="form-group">
             <label>Username / Email</label>
-            <input type="email" id="auth-email" placeholder="Enter UserName" required />
+            <input type="email" id="auth-email" placeholder="ashwinanu7200@gmail.com" required />
           </div>
           <div class="form-group">
             <label>Password</label>
             <input type="password" id="auth-password" placeholder="••••••••" required />
           </div>
 
-          <button type="submit" class="btn-login" id="auth-submit-btn">
-            Sign In to Portal
-          </button>
+          <button type="submit" class="btn-login" id="auth-submit-btn">Sign In to Portal</button>
         </form>
 
-        <!-- Quick 1-Click Fill Helper -->
         <div class="auto-fill-card">
           <p>Quick Access Credentials Configured</p>
-          <button type="button" class="btn-autofill" onclick="autoFillCredentials()">
-            ⚡ One-Click Auto-Fill
-          </button>
+          <button type="button" class="btn-autofill" onclick="autoFillCredentials()">⚡ One-Click Auto-Fill</button>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- ==========================================
-       2. MAIN DASHBOARD VIEW
-       ========================================== -->
+  <!-- 2. MAIN DASHBOARD -->
   <div id="dashboard-view">
     <div class="container">
       <header>
@@ -498,7 +364,7 @@
         </div>
       </header>
 
-      <!-- KPI Summary Cards -->
+      <!-- 5 KPI METRIC CARDS (INCLUDES RECEIVED REVENUE) -->
       <div class="kpi-grid">
         <div class="kpi-card">
           <div class="kpi-title">Active Inquiries</div>
@@ -516,9 +382,14 @@
           <div class="kpi-title">Confirmed Revenue</div>
           <div class="kpi-value" id="kpi-confirmed-value" style="color: var(--primary);">AED 0</div>
         </div>
+        <!-- NEW RECEIVED REVENUE CARD -->
+        <div class="kpi-card" style="border-left: 4px solid var(--emerald);">
+          <div class="kpi-title">Received Revenue</div>
+          <div class="kpi-value" id="kpi-received-value" style="color: var(--emerald);">AED 0</div>
+        </div>
       </div>
 
-      <!-- Navigation Tabs & Row Count -->
+      <!-- Navigation Tabs & Active Filter Status -->
       <div class="view-bar">
         <div class="tabs">
           <button class="tab-btn active" id="tab-inquiry" onclick="switchTab('inquiry')">
@@ -533,7 +404,7 @@
         <div class="filter-count" id="active-rows-count">Showing all rows</div>
       </div>
 
-      <!-- Main Data Table with Column Filters -->
+      <!-- Table with Column Filters -->
       <div class="table-container">
         <table>
           <thead>
@@ -549,15 +420,9 @@
             </tr>
             <!-- Individual Column Search Inputs -->
             <tr class="filter-header-row">
-              <th>
-                <input type="text" class="col-filter-input" id="col-f-date" placeholder="Search Date..." oninput="renderTables()" />
-              </th>
-              <th>
-                <input type="text" class="col-filter-input" id="col-f-client" placeholder="Filter Client..." oninput="renderTables()" />
-              </th>
-              <th>
-                <input type="text" class="col-filter-input" id="col-f-show" placeholder="Filter Show..." oninput="renderTables()" />
-              </th>
+              <th><input type="text" class="col-filter-input" id="col-f-date" placeholder="Search Date..." oninput="renderTables()" /></th>
+              <th><input type="text" class="col-filter-input" id="col-f-client" placeholder="Filter Client..." oninput="renderTables()" /></th>
+              <th><input type="text" class="col-filter-input" id="col-f-show" placeholder="Filter Show..." oninput="renderTables()" /></th>
               <th>
                 <select class="col-filter-select" id="col-f-type" onchange="renderTables()">
                   <option value="">All Types</option>
@@ -565,12 +430,8 @@
                   <option value="DryHire">DryHire</option>
                 </select>
               </th>
-              <th>
-                <input type="text" class="col-filter-input" id="col-f-requirement" placeholder="Filter Requirement..." oninput="renderTables()" />
-              </th>
-              <th>
-                <input type="text" class="col-filter-input" id="col-f-price" placeholder="Filter Price..." oninput="renderTables()" />
-              </th>
+              <th><input type="text" class="col-filter-input" id="col-f-requirement" placeholder="Filter Requirement..." oninput="renderTables()" /></th>
+              <th><input type="text" class="col-filter-input" id="col-f-price" placeholder="Filter Price..." oninput="renderTables()" /></th>
               <th>
                 <select class="col-filter-select" id="col-f-paid" onchange="renderTables()">
                   <option value="">All Statuses</option>
@@ -661,7 +522,6 @@
       getFirestore, collection, addDoc, onSnapshot, doc, updateDoc, deleteDoc, serverTimestamp 
     } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
-    // Your Exact Config
     const firebaseConfig = {
       apiKey: "AIzaSyCKTprB6-2W9CMFOvGrPvm8lgEEBrpKa9s",
       authDomain: "ashwineavsales.firebaseapp.com",
@@ -680,17 +540,14 @@
     let currentTab = 'inquiry';
     let unsubscribeSnapshot = null;
 
-    // YOUR HARDCODED CREDENTIALS
     const VALID_USER = "ashwinanu7200@gmail.com";
-    const VALID_PASS = "12345678900";
+    const VALID_PASS = "Frndforever9**";
 
-    // 1-Click Auto Fill
     window.autoFillCredentials = function() {
       document.getElementById('auth-email').value = VALID_USER;
       document.getElementById('auth-password').value = VALID_PASS;
     };
 
-    // Check Login
     window.handleAuthSubmit = function(e) {
       e.preventDefault();
       const email = document.getElementById('auth-email').value.trim();
@@ -698,7 +555,6 @@
       const errorDiv = document.getElementById('auth-error-msg');
 
       if (email.toLowerCase() === VALID_USER.toLowerCase() && pass === VALID_PASS) {
-        // Successful login
         sessionStorage.setItem("isLoggedIn", "true");
         launchDashboard();
       } else {
@@ -711,7 +567,6 @@
       document.getElementById('auth-view').style.display = 'none';
       document.getElementById('dashboard-view').style.display = 'block';
 
-      // Connect to Firestore
       if (!unsubscribeSnapshot) {
         unsubscribeSnapshot = onSnapshot(jobsCollection, (snapshot) => {
           records = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
@@ -721,12 +576,10 @@
       }
     }
 
-    // Check session on load
     if (sessionStorage.getItem("isLoggedIn") === "true") {
       launchDashboard();
     }
 
-    // Sign Out
     window.handleSignOut = function() {
       if (confirm("Are you sure you want to log out?")) {
         sessionStorage.removeItem("isLoggedIn");
@@ -734,7 +587,6 @@
       }
     };
 
-    // Dashboard Functions
     window.switchTab = function(tab) {
       currentTab = tab;
       document.getElementById('tab-inquiry').classList.toggle('active', tab === 'inquiry');
@@ -874,6 +726,7 @@
       a.click();
     };
 
+    // KPI Calculation (Includes Received Revenue)
     function updateMetrics() {
       const inquiries = records.filter(r => r.status === 'inquiry');
       const confirmed = records.filter(r => r.status === 'confirmed');
@@ -881,10 +734,19 @@
       const inquiryVal = inquiries.reduce((sum, r) => sum + Number(r.price || 0), 0);
       const confirmedVal = confirmed.reduce((sum, r) => sum + Number(r.price || 0), 0);
 
+      // Calculates actual received money based on payment percentage
+      const receivedVal = confirmed.reduce((sum, r) => {
+        const price = Number(r.price || 0);
+        if (r.paid === 'Paid') return sum + price;
+        if (r.paid && r.paid.includes('50%')) return sum + (price * 0.5);
+        return sum; // 0 for Not Paid
+      }, 0);
+
       document.getElementById('kpi-inquiry-count').textContent = inquiries.length;
       document.getElementById('kpi-confirmed-count').textContent = confirmed.length;
       document.getElementById('kpi-inquiry-value').textContent = 'AED ' + inquiryVal.toLocaleString();
       document.getElementById('kpi-confirmed-value').textContent = 'AED ' + confirmedVal.toLocaleString();
+      document.getElementById('kpi-received-value').textContent = 'AED ' + receivedVal.toLocaleString();
 
       document.getElementById('tab-inquiry-badge').textContent = inquiries.length;
       document.getElementById('tab-confirmed-badge').textContent = confirmed.length;
